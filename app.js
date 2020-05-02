@@ -1,14 +1,14 @@
 'use strict';
-var debug = require('debug');
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var cors = require('cors');
+const debug = require('debug');
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
-var api = require('./api');
-var app = express();
+const api = require('./api');
+const app = express();
 
 app.use(cors());
 app.use(logger('dev'));
@@ -21,7 +21,7 @@ app.use('/', api);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
+    const err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
@@ -60,6 +60,6 @@ app.use(function (err, req, res, next) {
 
 app.set('port', process.env.PORT || 8000);
 
-var server = app.listen(app.get('port'), function () {
+const server = app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + server.address().port);
 });
