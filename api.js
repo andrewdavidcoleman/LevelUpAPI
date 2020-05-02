@@ -4,25 +4,6 @@ const mysql = require('mysql');
 
 const app = express();
 
-//const performances = [
-//    {
-//        performanceId: 111,
-//        wodId: 333,
-//        wodType: 'ft',
-//        athleteId: 3,
-//        result: '22:13',
-//        date: '12/12/2019'
-//    },
-//    {
-//        performanceId: 222,
-//        wodId: 777,
-//        wodType: 'amrap',
-//        athleteId: 3,
-//        result: '5+14',
-//        date: '01/22/2020'
-//    },
-//]
-
 app.get('/', function (req, res) {
     res.json(['hello root!'])
 })
@@ -67,6 +48,29 @@ app.post('/createAthlete', (req, res, next) => {
 
         `INSERT INTO athletes (name)
         VALUES (${res.query.name})`
+
+        , (err, rows, fields) => {
+            console.log(err)
+            res.json(rows);
+        })
+})
+
+app.post('/createPerformance', (req, res, next) => {
+    if (err) {
+        console.log('DB error: ' + err)
+        return;
+    }
+
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        database: 'LevelUp'
+    })
+
+    connection.query(
+
+        `INSERT INTO performances (wodId, athleteId, result, date)
+        VALUES (${res.query.wodId}, ${res.query.athleteId}, ${res.query.result}, ${res.query.date},)`
 
         , (err, rows, fields) => {
             console.log(err)
@@ -200,6 +204,34 @@ app.post('/updateAthlete', (req, res, next) => {
         })
 })
 
+app.post('/updatePerformance', (req, res, next) => {
+    if (err) {
+        console.log('DB error: ' + err)
+        return;
+    }
+
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        database: 'LevelUp'
+    })
+
+    connection.query(
+
+        `UPDATE performances
+        SET 
+        wodId = ${req.query.wodId},
+        athleteId = ${req.query.athleteId},
+        result = ${req.query.result},
+        date = ${req.query.date}
+        WHERE wodId = ${req.query.wodId}`
+
+        , (err, rows, fields) => {
+            console.log(err)
+            res.json(rows);
+        })
+})
+
 // ========================================================================== Delete
 app.post('/deleteWod', (req, res, next) => {
     if (err) {
@@ -240,6 +272,29 @@ app.post('/deleteAthlete', (req, res, next) => {
 
         `DELETE FROM athletes
         WHERE athleteId = ${req.query.athleteId}`
+
+        , (err, rows, fields) => {
+            console.log(err)
+            res.json(rows);
+        })
+})
+
+app.post('/deletePerformance', (req, res, next) => {
+    if (err) {
+        console.log('DB error: ' + err)
+        return;
+    }
+
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        database: 'LevelUp'
+    })
+
+    connection.query(
+
+        `DELETE FROM performances
+        WHERE performanceId = ${req.query.performanceId}`
 
         , (err, rows, fields) => {
             console.log(err)
