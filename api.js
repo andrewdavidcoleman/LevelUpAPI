@@ -61,6 +61,11 @@ app.get('/', function (req, res) {
 
 app.get('/getAllAthletes', (req, res, next) => {
 
+    if (err) {
+        console.log('DB error: ' + err)
+        return;
+    }
+
     const connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
@@ -79,6 +84,11 @@ app.get('/getAllAthletes', (req, res, next) => {
 
 app.get('/getAllWods', (req, res, next) => {
 
+    if (err) {
+        console.log('DB error: ' + err)
+        return;
+    }
+
     const connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
@@ -96,6 +106,11 @@ app.get('/getAllWods', (req, res, next) => {
 })
 
 app.get("/getAllPerformancesByAthleteIdWodId", (req, res, next) => {
+
+    if (err) {
+        console.log('DB error: ' + err)
+        return;
+    }
 
     const connection = mysql.createConnection({
         host: 'localhost',
