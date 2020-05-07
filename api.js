@@ -60,11 +60,11 @@ app.post('/createPerformance', (req, res, next) => {
         user: 'root',
         database: 'LevelUp'
     })
-
+    console.log(req.body);
     connection.query(
 
         `INSERT INTO performances (wodId, athleteId, result, date)
-        VALUES (${req.query.wodId}, ${req.query.athleteId}, ${req.query.result}, ${req.query.date})`
+        VALUES (${req.body.wodId}, ${req.body.athleteId}, '${req.body.result}', '${req.body.date}')`
 
         , (err, rows, fields) => {
             if (err) {
@@ -75,10 +75,10 @@ app.post('/createPerformance', (req, res, next) => {
                     status: res.statusMessage,
                     message: 'Performance added successfully',
                     performance: {
-                        wodId: req.query.wodId,
-                        athleteId: req.query.athleteId,
-                        result: req.query.result,
-                        date: req.query.date
+                        wodId: req.body.wodId,
+                        athleteId: req.body.athleteId,
+                        result: req.body.result,
+                        date: req.body.date
                     }
                 });
             }
@@ -138,7 +138,7 @@ app.get("/getAllPerformances", (req, res, next) => {
 
     connection.query(
 
-        `SELECT * FROM performances`
+        `SELECT * FROM performances ORDER BY date ASC`
 
         , (err, rows, fields) => {
             if (err) {
