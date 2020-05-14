@@ -1,8 +1,14 @@
 'use strict';
 const express = require('express');
 const mysql = require('mysql');
-
 const app = express();
+
+const dbconfig = {
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DB,
+}
 
 app.get('/', function (req, res) {
     res.json(['hello root!'])
@@ -11,11 +17,7 @@ app.get('/', function (req, res) {
 // ========================================================================== Create
 app.post('/createWod', (req, res, next) => {
 
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'LevelUp'
-    })
+    const connection = mysql.createConnection(dbconfig)
 
     connection.query(
 
@@ -42,11 +44,7 @@ app.post('/createWod', (req, res, next) => {
 
 app.post('/createAthlete', (req, res, next) => {
 
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'LevelUp'
-    })
+    const connection = mysql.createConnection(dbconfig)
 
     connection.query(
 
@@ -71,11 +69,7 @@ app.post('/createAthlete', (req, res, next) => {
 
 app.post('/createPerformance', (req, res, next) => {
 
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'LevelUp'
-    })
+    const connection = mysql.createConnection(dbconfig)
     console.log(req.body);
     connection.query(
 
@@ -106,11 +100,7 @@ app.post('/createPerformance', (req, res, next) => {
 // ========================================================================== Read
 app.get('/getAllAthletes', (req, res, next) => {
 
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'LevelUp'
-    })
+    const connection = mysql.createConnection(dbconfig)
 
     connection.query(
 
@@ -127,11 +117,7 @@ app.get('/getAllAthletes', (req, res, next) => {
 
 app.get('/getAllWods', (req, res, next) => {
 
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'LevelUp'
-    })
+    const connection = mysql.createConnection(dbconfig)
 
     connection.query(
 
@@ -148,11 +134,7 @@ app.get('/getAllWods', (req, res, next) => {
 
 app.get("/getAllPerformances", (req, res, next) => {
 
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'LevelUp'
-    })
+    const connection = mysql.createConnection(dbconfig)
 
     connection.query(
 
@@ -170,11 +152,7 @@ app.get("/getAllPerformances", (req, res, next) => {
 
 app.get("/getAllPerformancesByAthleteIdWodId", (req, res, next) => {
 
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'LevelUp'
-    })
+    const connection = mysql.createConnection(dbconfig)
 
     connection.query(
 
@@ -195,11 +173,7 @@ app.get("/getAllPerformancesByAthleteIdWodId", (req, res, next) => {
 // ========================================================================== Update
 app.post('/updateWod', (req, res, next) => {
 
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'LevelUp'
-    })
+    const connection = mysql.createConnection(dbconfig)
 
     connection.query(
 
@@ -221,11 +195,7 @@ app.post('/updateWod', (req, res, next) => {
 
 app.post('/updateAthlete', (req, res, next) => {
 
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'LevelUp'
-    })
+    const connection = mysql.createConnection(dbconfig)
 
     connection.query(
 
@@ -245,11 +215,7 @@ app.post('/updateAthlete', (req, res, next) => {
 
 app.post('/updatePerformance', (req, res, next) => {
 
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'LevelUp'
-    })
+    const connection = mysql.createConnection(dbconfig)
 
     connection.query(
 
@@ -273,11 +239,7 @@ app.post('/updatePerformance', (req, res, next) => {
 // ========================================================================== Delete
 app.post('/deleteWod', (req, res, next) => {
 
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'LevelUp'
-    })
+    const connection = mysql.createConnection(dbconfig)
 
     connection.query(
 
@@ -295,11 +257,7 @@ app.post('/deleteWod', (req, res, next) => {
 
 app.post('/deleteAthlete', (req, res, next) => {
 
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'LevelUp'
-    })
+    const connection = mysql.createConnection(dbconfig)
 
     connection.query(
 
@@ -317,11 +275,7 @@ app.post('/deleteAthlete', (req, res, next) => {
 
 app.post('/deletePerformance', (req, res, next) => {
 
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'LevelUp'
-    })
+    const connection = mysql.createConnection(dbconfig)
 
     connection.query(
 
