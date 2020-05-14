@@ -27,7 +27,16 @@ app.post('/createWod', (req, res, next) => {
                 console.log('DB error: ' + err)
                 return;
             }
-            res.json(rows);
+            res.json({
+                status: res.statusMessage,
+                message: 'WOD added successfully',
+                wod: {
+                    wodId: rows.insertId,
+                    name: req.body.name,
+                    type: req.body.type,
+                    description: req.body.description
+                }
+            })
         })
 })
 
@@ -49,7 +58,14 @@ app.post('/createAthlete', (req, res, next) => {
                 console.log('DB error: ' + err)
                 return;
             }
-            res.json(rows);
+            res.json({
+                status: res.statusMessage,
+                message: 'WOD added successfully',
+                athlete: {
+                    athleteId: rows.insertId,
+                    name: req.body.name
+                }
+            })
         })
 })
 
@@ -71,10 +87,12 @@ app.post('/createPerformance', (req, res, next) => {
                 console.log('DB error: ' + err)
                 return;
             } else {
+                console.log(rows);
                 res.json({
                     status: res.statusMessage,
                     message: 'Performance added successfully',
                     performance: {
+                        performanceId: rows.insertId,
                         wodId: req.body.wodId,
                         athleteId: req.body.athleteId,
                         result: req.body.result,
