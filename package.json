@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon app",
+    "start": "node app",
     "dev": "cross-env HOST=localhost USER=root DB=LevelUp PORT=8000 nodemon app"
   },
   "description": "LevelUpAPI",
