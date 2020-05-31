@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node app",
-    "dev": "cross-env HOST=localhost USER=root DB=LevelUp PORT=8000 nodemon app"
+    "dev": "cross-env HOST=localhost USER=root DB=LevelUp PORT=8000 nodemon app",
+    "dev-prod-db": "cross-env HOST=us-cdbr-east-06.cleardb.net USER=b2dead282473a6 PASSWORD=2de76208 DB=heroku_308803e0f78a2bd PORT=8000 nodemon app"
   },
   "description": "LevelUpAPI",
   "author": {

@@ -39,6 +39,8 @@ app.post('/createWod', (req, res, next) => {
                     description: req.body.description
                 }
             })
+
+            connection.end()
         })
 })
 
@@ -64,6 +66,8 @@ app.post('/createAthlete', (req, res, next) => {
                     name: req.body.name
                 }
             })
+            
+            connection.end()
         })
 })
 
@@ -80,20 +84,21 @@ app.post('/createPerformance', (req, res, next) => {
             if (err) {
                 console.log('DB error: ' + err)
                 return;
-            } else {
-                console.log(rows);
-                res.json({
-                    status: res.statusMessage,
-                    message: 'Performance added successfully',
-                    performance: {
-                        performanceId: rows.insertId,
-                        wodId: req.body.wodId,
-                        athleteId: req.body.athleteId,
-                        result: req.body.result,
-                        date: req.body.date
-                    }
-                });
             }
+
+            res.json({
+                status: res.statusMessage,
+                message: 'Performance added successfully',
+                performance: {
+                    performanceId: rows.insertId,
+                    wodId: req.body.wodId,
+                    athleteId: req.body.athleteId,
+                    result: req.body.result,
+                    date: req.body.date
+                }
+            });
+
+            connection.end()
         })
 })
 
@@ -112,6 +117,8 @@ app.get('/getAllAthletes', (req, res, next) => {
                 return;
             }
             res.json(rows)
+            
+            connection.end()
         })
 })
 
@@ -128,7 +135,9 @@ app.get('/getAllWods', (req, res, next) => {
                 console.log('DB error: ' + err)
                 return;
             }
-            res.json(rows);
+            res.json(rows)
+            
+            connection.end()
         })
 })
 
@@ -145,7 +154,9 @@ app.get("/getAllPerformances", (req, res, next) => {
                 console.log('DB error: ' + err)
                 return;
             }
-            res.json(rows);
+            res.json(rows)
+            
+            connection.end()
         })
 
 })
@@ -165,7 +176,9 @@ app.get("/getAllPerformancesByAthleteIdWodId", (req, res, next) => {
                 console.log('DB error: ' + err)
                 return;
             }
-            res.json(rows);
+            res.json(rows)
+            
+            connection.end()
         })
 
 })
@@ -189,7 +202,9 @@ app.post('/updateWod', (req, res, next) => {
                 console.log('DB error: ' + err)
                 return;
             }
-            res.json(rows);
+            res.json(rows)
+            
+            connection.end()
         })
 })
 
@@ -209,7 +224,9 @@ app.post('/updateAthlete', (req, res, next) => {
                 console.log('DB error: ' + err)
                 return;
             }
-            res.json(rows);
+            res.json(rows)
+            
+            connection.end()
         })
 })
 
@@ -232,7 +249,9 @@ app.post('/updatePerformance', (req, res, next) => {
                 console.log('DB error: ' + err)
                 return;
             }
-            res.json(rows);
+            res.json(rows)
+            
+            connection.end()
         })
 })
 
@@ -251,7 +270,9 @@ app.post('/deleteWod', (req, res, next) => {
                 console.log('DB error: ' + err)
                 return;
             }
-            res.json(rows);
+            res.json(rows)
+            
+            connection.end()
         })
 })
 
@@ -269,7 +290,9 @@ app.post('/deleteAthlete', (req, res, next) => {
                 console.log('DB error: ' + err)
                 return;
             }
-            res.json(rows);
+            res.json(rows)
+            
+            connection.end()
         })
 })
 
@@ -287,7 +310,9 @@ app.post('/deletePerformance', (req, res, next) => {
                 console.log('DB error: ' + err)
                 return;
             }
-            res.json(rows);
+            res.json(rows)
+            
+            connection.end()
         })
 })
 
