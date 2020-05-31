@@ -14,6 +14,36 @@ app.get('/', function (req, res) {
     res.json(['hello root!'])
 })
 
+// ========================================================================== Auth
+app.post('/register', () => {
+
+    const connection = mysql.createConnection(dbconfig)
+
+    connection.query(
+
+        `INSERT INTO users (firstName, lastName, email, password)
+        VALUES ('${req.body.firstName}', '${req.body.lastName}', '${req.body.email}', '${req.body.password}')`
+
+        , (err, rows, fields) => {
+            if (err) {
+                console.log('DB error: ' + err)
+                return;
+            }
+            res.json({
+                status: res.statusMessage,
+                message: 'User added successfully',
+                user: {
+                    userId: rows.insertId,
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    email: req.body.email
+                }
+            })
+
+            connection.end()
+        })
+})
+
 // ========================================================================== Create
 app.post('/createWod', (req, res, next) => {
 
